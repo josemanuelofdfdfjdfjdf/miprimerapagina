@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Aprende Jugando - Tutorías Estudiantiles</title>
+</head>
+
+<body>
+    <!-- Encabezado -->
+    <header>
+        <h1 class="TITULO">Aprende Jugando</h1>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#materias">Materias</a></li>
+                <li><a href="#juegos">Zona de Juegos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <!-- Sección de Inicio -->
+    <section id="inicio">
+        <h2 class="SUBTITULO">¡Bienvenido a Aprende Jugando!</h2>
+        <p>Diviértete mientras aprendes sobre tus materias favoritas. Elige una materia para comenzar y desbloquea juegos educativos emocionantes.</p>
+    </section>
+
+
+
+
+    <!-- Sección de Materias -->
+    <section id="materias">
+        <h2 class="SELECCION">Materias Disponibles</h2>
+        <ul>
+            <li><a href="#matematicas">Matemáticas</a></li>
+            <li><a href="#ciencias">Ciencias</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#ingles">Inglés</a></li>
+        </ul>
+    </section>
+
+
+
+
+<!-- Sección de Preguntas: Matemáticas -->
+<section id="matematicas" style="display: none;">
+    <h2 class="PREGUNTASMATEMATICAS">Preguntas de Matemáticas</h2>
+    <p>Responde las preguntas correctamente para ganar puntos.</p>
+    <div>
+        
+    <div id="suma">
+        <h3 class="SUMA">Suma</h3>
+        <div>
+            <p>1. ¿Cuánto es 5 + 3?</p>
+            <button onclick="responderPreguntaMatematicas(this, true)">8</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">7</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">10</button>
+        </div>
+        <div>
+            <p>2. ¿Cuánto es 7 + 2?</p>
+            <button onclick="responderPreguntaMatematicas(this, true)">9</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">8</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">10</button>
+        </div>
+    </div>
+    
+    <div id="resta">
+        <h3 class="RESTA">Resta</h3>
+        <div>
+            <p>1. ¿Cuánto es 15 - 6?</p>
+            <button onclick="responderPreguntaMatematicas(this, true)">9</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">8</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">10</button>
+        </div>
+    </div>
+    
+    <div id="algebra">
+        <h3 class="ALGEBRA">Álgebra</h3>
+        <div>
+            <p>1. Si x + 5 = 10, ¿cuánto es x?</p>
+            <button onclick="responderPreguntaMatematicas(this, true)">5</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">6</button>
+            <button onclick="responderPreguntaMatematicas(this, false)">4</button>
+        </div>
+    </div>
+    
+    <p id="puntos">Puntos: 0</p>
+</section>
+
+
+
+<script>
+    let puntos = 0;
+
+    // Mostrar preguntas de Matemáticas
+    document.querySelector('a[href="#matematicas"]').addEventListener('click', function () {
+        ocultarSecciones();
+        document.getElementById('matematicas').style.display = 'block';
+    });
+
+    // Ocultar todas las secciones excepto la seleccionada
+    function ocultarSecciones() {
+        const secciones = document.querySelectorAll('section');
+        secciones.forEach(seccion => seccion.style.display = 'none');
+    }
+
+    // Responder pregunta
+    function responderPreguntaMatematicas(boton, esCorrecto) {
+        if (esCorrecto) {
+            puntos += 10;
+        } else {
+            alert("Respuesta incorrecta. Inténtalo de nuevo.");
+        }
+        document.getElementById('puntos').textContent = `Puntos: ${puntos}`;
+        boton.disabled = true; // Deshabilitar botón después de responder
+    }
+
+
+let puntosCiencias = 0; // Puntos para la sección de Ciencias
+
+// Mostrar preguntas de Ciencias
+document.querySelector('a[href="#ciencias"]').addEventListener('click', function () {
+    ocultarSecciones();
+    document.getElementById('ciencias').style.display = 'block';
+});
+
+// Responder pregunta de Ciencias
+function responderPreguntaCiencias(boton, esCorrecto) {
+    if (esCorrecto) {
+        puntosCiencias += 10;
+        alert("¡Correcto! Ganas 10 puntos.");
+    } else {
+        alert("Respuesta incorrecta. Inténtalo de nuevo.");
+    }
+    document.getElementById('puntos-ciencias').textContent = `Puntos: ${puntosCiencias}`;
+    boton.disabled = true; // Deshabilitar botón después de responder
+}
+
+
+// Mostrar preguntas del área seleccionada
+function mostrarPreguntas(area) {
+    // Ocultar todas las áreas de preguntas
+    document.querySelectorAll('.preguntas-area').forEach(div => {
+        div.style.display = 'none';
+    });
+    // Mostrar el área seleccionada
+    document.getElementById(area).style.display = 'block';
+}
+
+// Manejar respuestas de las preguntas
+function responderPregunta(boton, esCorrecto) {
+    if (esCorrecto) {
+        puntos += 10;
+        alert("¡Correcto! Ganas 10 puntos.");
+    } else {
+        alert("Respuesta incorrecta. Inténtalo de nuevo.");
+    }
+    document.getElementById('puntos').textContent = `Puntos: ${puntos}`;
+    boton.disabled = true; // Deshabilitar botón después de responder
+}
+
+
+
+let puntosHistoria = 0; // Puntos para la sección de Historia
+
+// Mostrar preguntas de Historia
+document.querySelector('a[href="#historia"]').addEventListener('click', function () {
+    ocultarSecciones();
+    document.getElementById('historia').style.display = 'block';
+});
+
+// Responder pregunta de Historia
+function responderPreguntaHistoria(boton, esCorrecto) {
+    if (esCorrecto) {
+        puntosHistoria += 10;
+        alert("¡Correcto! Ganas 10 puntos.");
+    } else {
+        alert("Respuesta incorrecta. Inténtalo de nuevo.");
+    }
+    document.getElementById('puntos-historia').textContent = `Puntos: ${puntosHistoria}`;
+    boton.disabled = true; // Deshabilitar botón después de responder
+}
+
+
+// Mostrar preguntas del área seleccionada
+function mostrarPreguntasHistoria(area) {
+    // Ocultar todas las áreas de preguntas
+    document.querySelectorAll('.preguntas-area').forEach(div => {
+        div.style.display = 'none';
+    });
+    // Mostrar el área seleccionada
+    document.getElementById(area).style.display = 'block';
+}
+
+// Manejar respuestas de las preguntas
+function responderPreguntaHistoria(boton, esCorrecto) {
+    if (esCorrecto) {
+        puntosHistoria += 10;
+        alert("¡Correcto! Ganas 10 puntos.");
+    } else {
+        alert("Respuesta incorrecta. Inténtalo de nuevo.");
+    }
+    document.getElementById('puntos-historia').textContent = `Puntos: ${puntosHistoria}`;
+    boton.disabled = true; // Deshabilitar botón después de responder
+}
+let puntosIngles = 0; // Puntos para la sección de Inglés
+
+// Mostrar preguntas de Inglés
+document.querySelector('a[href="#ingles"]').addEventListener('click', function () {
+    ocultarSecciones();
+    document.getElementById('ingles').style.display = 'block';
+});
+
+// Responder pregunta de Inglés
+function responderPreguntaIngles(boton, esCorrecto) {
+    if (esCorrecto) {
+        puntosIngles += 10;
+        alert("¡Correcto! Ganas 10 puntos.");
+    } else {
+        alert("Respuesta incorrecta. Inténtalo de nuevo.");
+    }
+    document.getElementById('puntos-ingles').textContent = `Puntos: ${puntosIngles}`;
+    boton.disabled = true; // Deshabilitar botón después de responder
+}
+</script>
+
+
+
+<!-- Sección de Preguntas: Ciencias -->
+<section id="ciencias" style="display: none;">
+    <h2 class="SELECCION">Preguntas de Ciencias</h2>
+    <div>
+        <p>1. ¿Cuál es el proceso por el cual las plantas producen su alimento?</p>
+        <button onclick="responderPreguntaCiencias(this, true)">Fotosíntesis</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Respiración celular</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Digestión</button>
+    </div>
+    <div>
+        <p>2. ¿Qué gas producen las plantas durante la fotosíntesis?</p>
+        <button onclick="responderPreguntaCiencias(this, true)">Oxígeno</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Dióxido de carbono</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Nitrógeno</button>
+    </div>
+    <div>
+        <p>3. ¿Cuál es la unidad básica de la vida?</p>
+        <button onclick="responderPreguntaCiencias(this, true)">Célula</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Átomo</button>
+        <button onclick="responderPreguntaCiencias(this, false)">Molécula</button>
+    </div>
+    <p id="puntos-ciencias">Puntos: 0</p>
+</section>
+
+<!-- Sección de Preguntas: Historia -->
+<section id="historia" style="display: none;">
+    <h2 class="SELECCION">Preguntas de Historia</h2>
+    <p>Responde las preguntas correctamente para ganar puntos.</p>
+    <div>
+        <p>1. ¿Cómo llegó el ser humano a América?</p>
+        <button onclick="responderPreguntaHistoria(this, true)">Por el estrecho de Bering al congelarse</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Por el océano pacífico</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Por avión ✈</button>
+    </div>
+    <div>
+        <p>2. ¿Cuales son las características de la vida nómada?</p>
+        <button onclick="responderPreguntaHistoria(this, false)">Vida en Pirámides, la escritura</button>
+        <button onclick="responderPreguntaHistoria(this, true)">Caza y recolección, Pinturas rupestres, Vida en cuevas</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Cerámica, Vida en chozas, Agricultura</button>
+    </div>
+    <div>
+        <p>3. ¿Cuáles   de   estas   actividades   económicasfueron   parte   de   la   vida   cotidiana   de   loshabitantes   de   las   ciudadesmesoamericanas?</p>
+        <button onclick="responderPreguntaHistoria(this, false)">Ganadería</button>
+        <button onclick="responderPreguntaHistoria(this, true)">Agricultura y Fabricación de puntas de obsidiana</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Fabricación de campanas</button>
+    </div>
+    <div>
+        <p>4. ¿En qué año comenzó la Revolución Francesa?</p>
+        <button onclick="responderPreguntaHistoria(this, true)">1789</button>
+        <button onclick="responderPreguntaHistoria(this, false)">1799</button>
+        <button onclick="responderPreguntaHistoria(this, false)">1804</button>
+    </div>
+    <div>
+        <p>5. ¿Qué imperio construyó el Coliseo?</p>
+        <button onclick="responderPreguntaHistoria(this, true)">Imperio Romano</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Imperio Bizantino</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Imperio Otomano</button>
+    </div>
+    <div>
+        <p>6. ¿Quién fue conocido como el Libertador de América?</p>
+        <button onclick="responderPreguntaHistoria(this, true)">Simón Bolívar</button>
+        <button onclick="responderPreguntaHistoria(this, false)">José de San Martín</button>
+        <button onclick="responderPreguntaHistoria(this, false)">Bernardo O'Higgins</button>
+    </div>    
+    <p id="puntos-historia">puntos: 0</p>    
+</section>
+
+<!-- Sección de Preguntas: Inglés -->
+<section id="ingles" style="display: none;">
+    <h2 class="SELECCION">Preguntas de Inglés</h2>
+    <p>Responde las preguntas correctamente para ganar puntos.</p>
+    <div>
+        <p>1. ¿Cuál es el significado de "apple"?</p>
+        <button onclick="responderPreguntaIngles(this, true)">Manzana</button>
+        <button onclick="responderPreguntaIngles(this, false)">Pera</button>
+        <button onclick="responderPreguntaIngles(this, false)">Plátano</button>
+    </div>
+    <div>
+        <p>2. ¿Cómo se dice "perro" en inglés?</p>
+        <button onclick="responderPreguntaIngles(this, true)">Dog</button>
+        <button onclick="responderPreguntaIngles(this, false)">Cat</button>
+        <button onclick="responderPreguntaIngles(this, false)">Bird</button>
+    </div>
+    <div>
+        <p>3. ¿Cuál es el pasado de "go"?</p>
+        <button onclick="responderPreguntaIngles(this, true)">Went</button>
+        <button onclick="responderPreguntaIngles(this, false)">Goes</button>
+        <button onclick="responderPreguntaIngles(this, false)">Gone</button>
+    </div>
+    <p id="puntos-ingles">Puntos: 0</p>
+</section>
+
+
+  <!-- Sección de Juegos -->
+    <section id="juegos">
+        <h2>Zona de Juegos</h2>
+        <p>Responde preguntas para desbloquear niveles y gana puntos jugando nuestros juegos interactivos.</p>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>¿Tienes dudas o comentarios? Contáctanos a través de nuestro formulario.</p>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Aprende Jugando. Todos los derechos reservados.</p>
+    </footer>
+
+<script>
+    // Función para mostrar la sección seleccionada
+    function mostrarSeccion(id) {
+        // Ocultar todas las secciones
+        const secciones = document.querySelectorAll('section');
+        secciones.forEach(seccion => {
+            seccion.style.display = 'none';
+        });
+
+        // Mostrar la sección seleccionada
+        const seccionSeleccionada = document.getElementById(id);
+        if (seccionSeleccionada) {
+            seccionSeleccionada.style.display = 'block';
+        }
+    }
+
+    // Añadir eventos a los enlaces del menú
+    document.querySelectorAll('nav ul li a').forEach(enlace => {
+        enlace.addEventListener('click', function (e) {
+            e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+            const idSeccion = this.getAttribute('href').substring(1); // Obtener el id de la sección
+            mostrarSeccion(idSeccion); // Mostrar la sección correspondiente
+        });
+    });
+
+    // Mostrar la sección "Inicio" al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        mostrarSeccion('inicio');
+    });
+</script>
+
+</body>
+</html>
